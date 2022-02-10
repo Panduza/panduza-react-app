@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+
+  dev:
+    image: node:17
+    user: node
+    container_name: panduza_react_app_dev
+    stdin_open: true
+    tty: true
+    entrypoint: /bin/bash
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/work
+    working_dir: /work
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
+
+
+
+  prod:
+    build: .
+    container_name: panduza_react_app_prod
+    entrypoint: yarn run start
+    ports:
+      - "80:3000"
+    working_dir: /work
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
+

@@ -1,2 +1,12 @@
-# panduza-react-app
-Web App to monitor Panduza interfaces
+# Panduza React App
+
+
+## Dev environment
+
+```bash
+# Start the dev container
+source compose-dev.sh
+```
+
+## Prod
+
