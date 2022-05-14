@@ -96,6 +96,32 @@ function DisplayCategories(props) {
                 </Card>
             </Grid>
 
+
+            <Grid item xs={4}>
+                <Card sx={{ maxWidth: 345 }}>
+                    <CardActionArea onClick={() => {
+                        router.push('/interfaces/powersupply')
+                    }} >
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image="/img/icon_psu.jpg"
+                            alt="io"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Power Supply
+                            </Typography>
+                            {/* <Typography variant="body2" color="text.secondary">
+                                Interfaces : 5
+                            </Typography> */}
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid>
+
+            
+
         </Grid>
     )
 }
