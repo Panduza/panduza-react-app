@@ -12,6 +12,9 @@ import {
     Typography,
     Chip,
     Box,
+    Card,
+    CardContent,
+    CardActions,
     Table,
     TableBody,
     TableCell,
@@ -30,6 +33,59 @@ import { TitleMenu } from '@/components/page/title'
 
 //
 import { MqttConns } from '@/libs/mqttconns'
+
+
+/**
+ * Card to manage a power supply interface
+ * 
+ * 
+ * @param {string} props.department - The employee's department.
+ * 
+ */
+function CardPowerSupply(props) {
+
+    return (
+        <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+                
+                <Typography variant="h5" component="div">
+                    benevolent
+                </Typography>
+                
+            </CardContent>
+            <CardActions>
+                <Slider
+                    aria-label="Volts"
+                    defaultValue={0}
+                    // value={itrf.volts}
+                    // getAriaValueText={(val) => { return `${val}V`; }}
+                    // step={0.1}
+                    // min={0}
+                    // max={50}
+                    // valueLabelDisplay="auto"
+                    // marks={volts_marks}
+                    // onChange={
+                    //     (event, newValue) => {
+
+                    //         console.log("change !!", itrf.volts)
+
+                    //         let new_interfaces = { ...interfacesRef.current }
+                    //         new_interfaces[itrf.base_topic].volts = newValue
+                    //         setInterfaces(new_interfaces)
+
+                    //         itrf.co.client.publish(
+                    //             itrf.base_topic + "/cmds/volts/set",
+                    //             JSON.stringify({ volts: itrf.volts })
+                    //         )
+                    //     }
+                    // }
+                />
+
+                <Button size="small">Learn More</Button>
+            </CardActions>
+        </Card>
+    );
+}
 
 /**
  * 
@@ -166,7 +222,21 @@ export default function Connections(props) {
                 { "level": "Power Supply", "url": "/interfaces/powersupply" }
             ]} />
 
+
             <Box sx={{ marginTop: '16px' }}>
+
+                {
+                    Object.keys(interfaces).map((base_topic, i) => {
+
+                        let itrf = interfaces[base_topic]
+
+                        return (<CardPowerSupply />)
+                    })
+                }
+
+            </Box>
+
+            {/* <Box sx={{ marginTop: '16px' }}>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -283,7 +353,7 @@ export default function Connections(props) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Box>
+            </Box> */}
 
         </Container>
     )
