@@ -34,58 +34,8 @@ import { TitleMenu } from '@/components/page/title'
 //
 import { MqttConns } from '@/libs/mqttconns'
 
+import CardPowerSupply from '@/components/cards/interfaces/power_supply'
 
-/**
- * Card to manage a power supply interface
- * 
- * 
- * @param {string} props.department - The employee's department.
- * 
- */
-function CardPowerSupply(props) {
-
-    return (
-        <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-                
-                <Typography variant="h5" component="div">
-                    benevolent
-                </Typography>
-                
-            </CardContent>
-            <CardActions>
-                <Slider
-                    aria-label="Volts"
-                    defaultValue={0}
-                    // value={itrf.volts}
-                    // getAriaValueText={(val) => { return `${val}V`; }}
-                    // step={0.1}
-                    // min={0}
-                    // max={50}
-                    // valueLabelDisplay="auto"
-                    // marks={volts_marks}
-                    // onChange={
-                    //     (event, newValue) => {
-
-                    //         console.log("change !!", itrf.volts)
-
-                    //         let new_interfaces = { ...interfacesRef.current }
-                    //         new_interfaces[itrf.base_topic].volts = newValue
-                    //         setInterfaces(new_interfaces)
-
-                    //         itrf.co.client.publish(
-                    //             itrf.base_topic + "/cmds/volts/set",
-                    //             JSON.stringify({ volts: itrf.volts })
-                    //         )
-                    //     }
-                    // }
-                />
-
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
-    );
-}
 
 /**
  * 
@@ -190,27 +140,6 @@ export default function Connections(props) {
 
 
 
-    const volts_marks = [
-        {
-            value: 0,
-            label: '0V',
-        },
-        {
-            value: 50,
-            label: '50V',
-        },
-    ];
-
-    const amps_marks = [
-        {
-            value: 0,
-            label: '0A',
-        },
-        {
-            value: 50,
-            label: '50A',
-        },
-    ];
 
 
 
@@ -230,130 +159,14 @@ export default function Connections(props) {
 
                         let itrf = interfaces[base_topic]
 
-                        return (<CardPowerSupply />)
+                        // return (<div />)
+                        return (<CardPowerSupply interface={itrf} />)
                     })
                 }
 
             </Box>
 
-            {/* <Box sx={{ marginTop: '16px' }}>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Broker</TableCell>
-                                <TableCell>Base Topic</TableCell>
-                                <TableCell>Volts</TableCell>
-                                <TableCell>Amps</TableCell>
-                                <TableCell>Enable</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                Object.keys(interfaces).map((base_topic, i) => {
 
-                                    let itrf = interfaces[base_topic]
-
-                                    return (
-                                        <TableRow
-                                            key={i}
-                                        >
-                                            <TableCell> {itrf.co.broker} </TableCell>
-                                            <TableCell> {itrf.base_topic} </TableCell>
-                                            <TableCell>
-
-                                                <Slider
-                                                    aria-label="Volts"
-                                                    defaultValue={0}
-                                                    value={itrf.volts}
-                                                    getAriaValueText={(val) => { return `${val}V`; }}
-                                                    step={0.1}
-                                                    min={0}
-                                                    max={50}
-                                                    valueLabelDisplay="auto"
-                                                    marks={volts_marks}
-                                                    onChange={
-                                                        (event, newValue) => {
-
-                                                            console.log("change !!", itrf.volts)
-
-                                                            let new_interfaces = { ...interfacesRef.current }
-                                                            new_interfaces[itrf.base_topic].volts = newValue
-                                                            setInterfaces(new_interfaces)
-
-                                                            itrf.co.client.publish(
-                                                                itrf.base_topic + "/cmds/volts/set",
-                                                                JSON.stringify({ volts: itrf.volts })
-                                                            )
-                                                        }
-                                                    }
-                                                />
-                                            </TableCell>
-
-                                            <TableCell>
-                                                <Slider
-                                                    aria-label="Amps"
-                                                    defaultValue={0}
-                                                    value={itrf.amps}
-                                                    getAriaValueText={(val) => { return `${val}A`; }}
-                                                    step={0.1}
-                                                    min={0}
-                                                    max={50}
-                                                    valueLabelDisplay="auto"
-                                                    marks={amps_marks}
-                                                    onChange={
-                                                        (event, newValue) => {
-
-                                                            console.log("change !!", itrf.amps)
-
-                                                            let new_interfaces = { ...interfacesRef.current }
-                                                            new_interfaces[itrf.base_topic].amps = newValue
-                                                            setInterfaces(new_interfaces)
-
-                                                            itrf.co.client.publish(
-                                                                itrf.base_topic + "/cmds/amps/set",
-                                                                JSON.stringify({ amps: itrf.amps })
-                                                            )
-                                                        }
-                                                    }
-                                                />
-                                            </TableCell>
-
-                                            <TableCell>
-                                                <Button
-                                                    onClick={() => {
-                                                        // console.log("click change !!", itrf.value)
-                                                        let toggle_enable = false
-                                                        if(itrf.enable === false) {
-                                                            toggle_enable = true
-                                                        }
-                                                        itrf.co.client.publish(
-                                                            itrf.base_topic + "/cmds/enable/set",
-                                                            JSON.stringify({ enable: toggle_enable })
-                                                        )
-                                                    }}
-                                                    sx={{
-                                                        display: 'flex',
-                                                        justifyContent: 'center',
-                                                        flexDirection: 'column',
-                                                        padding: 1
-                                                    }}
-                                                >
-                                                    { itrf.enable ? 'ON' : 'OFF' }
-                                                </Button>
-                                            </TableCell>
-                                            
-                                        </TableRow>
-                                    )
-                                }
-
-                                )
-                            }
-
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Box> */}
 
         </Container>
     )

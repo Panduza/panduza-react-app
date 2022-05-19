@@ -196,7 +196,7 @@ function DisplayArray(props) {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Broker</TableCell>
+                            {/* <TableCell>Broker</TableCell> */}
                             <TableCell>Base Topic</TableCell>
                             <TableCell>Type</TableCell>
                         </TableRow>
@@ -208,7 +208,7 @@ function DisplayArray(props) {
                                     <TableRow
                                         key={index}
                                     >
-                                        <TableCell> {itrf.broker} </TableCell>
+                                        {/* <TableCell> {itrf.broker} </TableCell> */}
                                         <TableCell> {itrf.base_topic} </TableCell>
                                         <TableCell> {itrf.type} </TableCell>
 
