@@ -75,7 +75,7 @@ export default function Connections(props) {
                 let message_string = new TextDecoder().decode(message)
                 let message_object = JSON.parse(message_string)
 
-                if (message_object.type === "power_supply") {
+                if (message_object.type === "psu") {
 
                     var is_new = true
                     if (base_topic in interfacesRef.current) {

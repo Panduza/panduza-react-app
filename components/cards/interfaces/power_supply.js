@@ -14,8 +14,10 @@ import {
     Chip,
     Box,
     Card,
+    CardHeader,
     CardContent,
     CardActions,
+    Avatar,
     Table,
     TableBody,
     TableCell,
@@ -166,33 +168,20 @@ export default function CardPowerSupply(props) {
 
     return (
         <Card sx={{ minWidth: 275, maxWidth: 512 }}>
-            <CardContent>
 
-                <Box sx={{ display: 'flex', flexDirection: 'row', mb: '32px' }}>
-
-                    <Box>
-
-                        <Typography sx={{ fontWeight: 'bold' }} variant="h5" component="div" >
-                            {props.interface.base_topic.split("/").pop()}
-                        </Typography>
-                        <Typography sx={{ fontSize: '14px', mb: 1.5 }} color="text.secondary">
-                            {props.interface.base_topic}
-                        </Typography>
-
-                    </Box>
-
-                    <Box sx={{ marginLeft: "auto" }}>
-
-                        <Image src="/img/power_sup.png"
+            <CardHeader
+                avatar={
+                    <Image src="/img/power_sup.png"
                             width={64}
                             height={64}
                         />
+                }
+                title={props.interface.base_topic.split("/").pop().replaceAll("_", " ")}
+                subheader={props.interface.base_topic}
+            />
 
-                    </Box>
-
-                </Box>
-
-
+            <CardContent >
+                
                 <Box sx={{ ml: "16px", mr: "16px" }}>
                     <SliderVolts />
                     <SliderAmps />
