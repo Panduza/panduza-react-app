@@ -86,7 +86,7 @@ export default function Connections(props) {
 
                         co.client.subscribe(base_topic + '/atts/amps')
                         co.client.subscribe(base_topic + '/atts/volts')
-                        co.client.subscribe(base_topic + '/atts/enable')
+                        co.client.subscribe(base_topic + '/atts/state')
 
                         let new_interfaces = { ...interfacesRef.current }
                         new_interfaces[base_topic] = {
@@ -94,16 +94,16 @@ export default function Connections(props) {
                             base_topic: base_topic,
                             amps: 0,
                             volts: 0,
-                            enable: false
+                            state: 'off'
                         }
 
                         setInterfaces(new_interfaces)
                     }
                 }
             }
-            else if (topic.endsWith('/atts/enable')) {
+            else if (topic.endsWith('/atts/state')) {
 
-                let base_topic = topic.slice(0, -12)
+                let base_topic = topic.slice(0, - '/atts/state'.length )
                 const obj = JSON.parse(message);
 
                 // console.log(base_topic, topic, message, co)
@@ -111,29 +111,46 @@ export default function Connections(props) {
 
                 if (base_topic in interfacesRef.current) {
                     let new_interfaces = { ...interfacesRef.current }
-                    new_interfaces[base_topic].enable = obj.enable
+                    new_interfaces[base_topic].state = obj.state
 
                     setInterfaces(new_interfaces)
                 }
 
             }
-            // else if (topic.endsWith('/atts/value')) {
-            //     // console.log(topic, message, co)
+            else if (topic.endsWith('/atts/volts')) {
+                // console.log(topic, message, co)
 
-            //     let base_topic = topic.slice(0, -11)
-            //     const obj = JSON.parse(message);
+                let base_topic = topic.slice(0, -11)
+                const obj = JSON.parse(message);
 
-            //     // console.log(base_topic, topic, message, co)
-            //     // console.log("====", interfacesRef.current)
+                // console.log(base_topic, topic, message, co)
+                // console.log("====", interfacesRef.current)
 
-            //     if (base_topic in interfacesRef.current) {
-            //         let new_interfaces = { ...interfacesRef.current }
-            //         new_interfaces[base_topic].value = parseInt(obj.value)
+                if (base_topic in interfacesRef.current) {
+                    let new_interfaces = { ...interfacesRef.current }
+                    new_interfaces[base_topic].volts = parseFloat(obj.volts)
 
-            //         setInterfaces(new_interfaces)
-            //     }
+                    setInterfaces(new_interfaces)
+                }
 
-            // }
+            }
+            else if (topic.endsWith('/atts/amps')) {
+                // console.log(topic, message, co)
+
+                let base_topic = topic.slice(0, -10)
+                const obj = JSON.parse(message);
+
+                // console.log(base_topic, topic, message, co)
+                // console.log("====", interfacesRef.current)
+
+                if (base_topic in interfacesRef.current) {
+                    let new_interfaces = { ...interfacesRef.current }
+                    new_interfaces[base_topic].amps = parseFloat(obj.amps)
+
+                    setInterfaces(new_interfaces)
+                }
+
+            }
         })
 
     }, [state_brokers])
