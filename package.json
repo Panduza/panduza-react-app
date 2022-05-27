@@ -24,7 +24,6 @@
     "react-redux": "^7.2.4",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sharp": "^0.29.1",
     "underscore": "^1.13.1",
     "use-client-router": "^1.0.4"
   },

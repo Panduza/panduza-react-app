@@ -145,7 +145,7 @@ export default function Connections(props) {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Broker</TableCell>
+                                {/* <TableCell>Broker</TableCell> */}
                                 <TableCell>Base Topic</TableCell>
                                 <TableCell>Direction</TableCell>
                                 <TableCell>Value</TableCell>
@@ -161,7 +161,7 @@ export default function Connections(props) {
                                         <TableRow
                                             key={i}
                                         >
-                                            <TableCell> {itrf.co.broker} </TableCell>
+                                            {/* <TableCell> {itrf.co.broker} </TableCell> */}
                                             <TableCell> {itrf.base_topic} </TableCell>
                                             <TableCell>
                                                 <Button
