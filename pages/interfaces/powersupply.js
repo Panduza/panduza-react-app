@@ -177,7 +177,7 @@ export default function Connections(props) {
                         let itrf = interfaces[base_topic]
 
                         // return (<div />)
-                        return (<CardPowerSupply interface={itrf} />)
+                        return (<CardPowerSupply key={i} interface={itrf} />)
                     })
                 }
 
