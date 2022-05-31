@@ -38,6 +38,21 @@ export default function brokersReducer(state = initialState, action) {
                 // debug
                 // console.log("brokers... >", brokers)
 
+                if( !brokers.hasOwnProperty('demo-broker') ) {
+                    let new_obj = {
+                        ...state,
+                    }
+                    new_obj['demo-broker'] = {
+                        enable: true,
+                        url: "192.168.1.1",
+                        port: 9001,
+                        username: "",
+                        password: ""
+                    }
+
+                    return new_obj
+                }
+                
                 // 
                 return brokers
             }
