@@ -73,7 +73,6 @@ function _ConnectionForm(props) {
         if (initial.name != data.name) { flag = true }
         if (initial.url != data.url) { flag = true }
         if (initial.port != data.port) { flag = true }
-        if (initial.enable != data.enable) { flag = true }
         if (modified != flag) { setModified(flag) }
     }
 
@@ -101,27 +100,6 @@ function _ConnectionForm(props) {
                             name: e.target.value
                         })
                     }}
-                />
-            </Grid>
-
-            {/* ========== ENABLE ========== */}
-            <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center' }} >
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={data.enable != null ? data.enable : true}
-                            onChange={(e) => {
-                                console.log(e.target.checked)
-                                setData({
-                                    ...data,
-                                    enable: e.target.checked
-                                })
-                            }}
-                            color="success"
-                        />
-                    }
-                    label="enable"
-                    labelPlacement="top"
                 />
             </Grid>
 

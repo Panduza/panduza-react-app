@@ -43,7 +43,6 @@ export default function brokersReducer(state = initialState, action) {
                         ...state,
                     }
                     new_obj['demo-broker'] = {
-                        enable: true,
                         url: "192.168.1.1",
                         port: 9001,
                         username: "",
@@ -67,7 +66,6 @@ export default function brokersReducer(state = initialState, action) {
                     ...state,
                 }
                 new_obj[action.name] = {
-                    enable: true,
                     url: "localhost",
                     port: 1883,
                     username: "",
