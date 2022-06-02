@@ -31,28 +31,6 @@ import {
 
 
 
-const volts_marks = [
-    {
-        value: 0,
-        label: '0V',
-    },
-    {
-        value: 50,
-        label: '50V',
-    },
-];
-
-const amps_marks = [
-    {
-        value: 0,
-        label: '0A',
-    },
-    {
-        value: 50,
-        label: '50A',
-    },
-];
-
 /**
  * Manage the volts slider of the card
  *
@@ -62,14 +40,26 @@ const amps_marks = [
  * @param {object} props.interface.base_topic - Pza base topic of this interface
  */
 function SliderVolts(props) {
+
+    const volts_marks = [
+        {
+            value: props.interface.volts.min,
+            label: props.interface.volts.min.toString() + 'V',
+        },
+        {
+            value: props.interface.volts.max,
+            label: props.interface.volts.max.toString() + 'V',
+        },
+    ];
+
     return (<Slider
         aria-label="Volts"
         defaultValue={0}
-        value={props.interface.volts}
+        value={props.interface.volts.value}
         getAriaValueText={(val) => { return `${val}V`; }}
-        step={0.1}
-        min={0}
-        max={50}
+        step={props.interface.volts.scale}
+        min={props.interface.volts.min}
+        max={props.interface.volts.max}
         valueLabelDisplay="auto"
         marks={volts_marks}
         onChange={
@@ -94,14 +84,26 @@ function SliderVolts(props) {
  * @param {object} props.interface.base_topic - Pza base topic of this interface
  */
 function SliderAmps(props) {
+
+    const amps_marks = [
+        {
+            value: props.interface.amps.min,
+            label: props.interface.amps.min.toString() + 'A',
+        },
+        {
+            value: props.interface.amps.max,
+            label: props.interface.amps.max.toString() + 'A',
+        },
+    ];
+
     return (<Slider
         aria-label="Amps"
         defaultValue={0}
-        value={props.interface.amps}
+        value={props.interface.amps.value}
         getAriaValueText={(val) => { return `${val}A`; }}
-        step={0.1}
-        min={0}
-        max={50}
+        step={props.interface.amps.scale}
+        min={props.interface.amps.min}
+        max={props.interface.amps.max}
         valueLabelDisplay="auto"
         marks={amps_marks}
         onChange={
@@ -130,10 +132,10 @@ function ButtonOnOff(props) {
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
 
 
-            <Chip 
-                label={ props.interface.state === 'on' ? 'ON' : 'OFF' }
-                color={ props.interface.state === 'on' ? 'success' : 'error' }
-                />
+            <Chip
+                label={props.interface.state === 'on' ? 'ON' : 'OFF'}
+                color={props.interface.state === 'on' ? 'success' : 'error'}
+            />
 
 
             <Button
@@ -147,9 +149,9 @@ function ButtonOnOff(props) {
                         JSON.stringify({ state: toggle_state })
                     )
                 }}
-                color={ props.interface.state === 'on' ? 'error' : 'success' }
+                color={props.interface.state === 'on' ? 'error' : 'success'}
             >
-                { props.interface.state === 'on' ? 'Turn OFF' : 'Turn ON' }
+                {props.interface.state === 'on' ? 'Turn OFF' : 'Turn ON'}
             </Button>
 
 

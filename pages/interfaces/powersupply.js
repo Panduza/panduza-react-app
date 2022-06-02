@@ -92,8 +92,18 @@ export default function Connections(props) {
                         new_interfaces[base_topic] = {
                             co: co,
                             base_topic: base_topic,
-                            amps: 0,
-                            volts: 0,
+                            amps: {
+                                value: 0,
+                                min: 0,
+                                max: 0,
+                                scale: 0.1,
+                            },
+                            volts: {
+                                value: 0,
+                                min: 0,
+                                max: 0,
+                                scale: 0.1,
+                            },
                             state: 'off'
                         }
 
@@ -128,7 +138,7 @@ export default function Connections(props) {
 
                 if (base_topic in interfacesRef.current) {
                     let new_interfaces = { ...interfacesRef.current }
-                    new_interfaces[base_topic].volts = parseFloat(obj.volts)
+                    new_interfaces[base_topic].volts = obj.volts
 
                     setInterfaces(new_interfaces)
                 }
@@ -145,7 +155,7 @@ export default function Connections(props) {
 
                 if (base_topic in interfacesRef.current) {
                     let new_interfaces = { ...interfacesRef.current }
-                    new_interfaces[base_topic].amps = parseFloat(obj.amps)
+                    new_interfaces[base_topic].amps = obj.amps
 
                     setInterfaces(new_interfaces)
                 }
