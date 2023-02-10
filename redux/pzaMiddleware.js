@@ -121,9 +121,7 @@ const pzaMiddleware = ({ dispatch, getState }) => next => action => {
           // Action on connection
           // Subscribe to all interface infos topics (to scan the broker)
           mqtt_client.on('connect', () => {
-            mqtt_client.subscribe('pza/+/+/+/+/info')
             mqtt_client.subscribe('pza/+/+/+/info')
-            mqtt_client.publish('pza','*')
             // dispatch({ type: 'co/connected', co: { name: action.co.name } })
           })
 
