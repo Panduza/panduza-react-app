@@ -56,7 +56,9 @@ export default function Connections(props) {
 
         mqttconns.on_connect((connack, co) => {
             // console.log("coo", co)
+            co.client.subscribe('pza/+/+/+/+/info')
             co.client.subscribe('pza/+/+/+/info')
+            co.client.publish('pza','*')
         })
 
         mqttconns.on_message((topic, message, co) => {
